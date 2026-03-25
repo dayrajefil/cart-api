@@ -67,7 +67,7 @@ class CartsController < ApplicationController
   def cart_payload(cart)
     {
       id: cart.id,
-      products: cart.cart_items.map { |item|
+      products: cart.reload.cart_items.includes(:product).map { |item|
         {
           id: item.product.id,
           name: item.product.name,
