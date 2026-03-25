@@ -47,9 +47,13 @@ services:
     command: bundle exec rspec
     volumes:
       - .:/rails
+    profiles:
+      - test
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     environment:
       - RAILS_ENV=test
       - DATABASE_URL=postgresql://postgres:password@db:5432/myapp_test
