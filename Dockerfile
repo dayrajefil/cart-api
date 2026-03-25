@@ -8,7 +8,9 @@ FROM ruby:$RUBY_VERSION-slim
 WORKDIR /rails
 
 ENV RAILS_ENV="development" \
-    BUNDLE_PATH="/usr/local/bundle"
+    BUNDLE_PATH="/usr/local/bundle" \
+    GEM_PATH="/usr/local/bundle/ruby/3.3.0" \
+    PATH="/usr/local/bundle/ruby/3.3.0/bin:$PATH"
 
 # Install packages needed to build and run the app
 RUN apt-get update -qq && \
@@ -36,5 +38,5 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-# CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
+# CMD ["rails", "server", "-b", "0.0.0.0"]
 CMD ["sleep", "infinity"]

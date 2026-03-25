@@ -223,11 +223,13 @@ Subir os serviços (API, banco de dados e Redis):
 make up
 ```
 
-Após subir, os containers ficam em execução em background. Para acessar o container e iniciar o servidor manualmente:
+Após subir, os containers ficam em execução em background. Para acessar o container e iniciar o servidor:
 ```bash
 make bash
-./bin/rails server -b 0.0.0.0
+rails server -b 0.0.0.0
 ```
+
+> O `-b 0.0.0.0` é necessário para que o servidor aceite requisições vindas de fora do container.
 
 Pausar os serviços (mantém dados e imagens):
 ```bash
@@ -250,12 +252,16 @@ make clean
 
 ### Subindo o servidor automaticamente
 
+Com o volume montado, alterações no código são refletidas imediatamente no container — não é necessário reconstruir a imagem após editar arquivos.
+
 Por padrão, o container sobe com `sleep infinity` e aguarda você iniciar o servidor manualmente. Se preferir que o servidor suba automaticamente com `make up`, edite o `Dockerfile`:
 
 ```dockerfile
-# CMD ["./bin/rails", "server", "-b", "0.0.0.0"]  ← descomentar
+# CMD ["rails", "server", "-b", "0.0.0.0"]  ← descomentar
 CMD ["sleep", "infinity"]                          ← comentar
 ```
+
+O código do host é sincronizado automaticamente com o container via volume — alterações nos arquivos são refletidas sem precisar reconstruir a imagem.
 
 ## Rotas disponíveis
 

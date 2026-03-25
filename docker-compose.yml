@@ -32,6 +32,8 @@ services:
     build: .
     ports:
       - '3000:3000'
+    volumes:
+      - .:/rails
     depends_on:
       db:
         condition: service_healthy
