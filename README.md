@@ -269,8 +269,6 @@ O código do host é sincronizado automaticamente com o container via volume —
 
 | Método | Rota | Descrição |
 |---|---|---|
-| Método | Rota | Descrição |
-|---|---|---|
 | `GET` | `/products` | Lista todos os produtos |
 | `GET` | `/products/:id` | Exibe um produto |
 | `POST` | `/products` | Cria um produto |
@@ -284,6 +282,23 @@ O código do host é sincronizado automaticamente com o container via volume —
     "name": "Nome do produto",
     "price": 9.99
   }
+}
+```
+
+### Carrinho
+
+| Método | Rota | Descrição |
+|---|---|---|
+| `GET` | `/cart` | Exibe o carrinho atual |
+| `POST` | `/cart` | Cria o carrinho e adiciona um produto |
+| `POST` | `/cart/add_item` | Adiciona ou incrementa um produto no carrinho |
+| `DELETE` | `/cart/:product_id` | Remove um produto do carrinho |
+
+**POST /cart** e **POST /cart/add_item**
+```json
+{
+  "product_id": 1,
+  "quantity": 2
 }
 ```
 
