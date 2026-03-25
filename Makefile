@@ -1,8 +1,11 @@
 up:
 	docker-compose up -d
 
-down:
-	docker-compose down
+stop:
+	docker-compose stop
+
+clean:
+	docker-compose down -v --rmi all --remove-orphans
 
 bash:
 	docker-compose exec web bash
