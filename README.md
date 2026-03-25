@@ -90,7 +90,7 @@ Response:
 }
 ```
 
-### 3. Alterar a quantidade de produtos no carrinho 
+### 3. Alterar a quantidade de produtos no carrinho
 Um carrinho pode ter _N_ produtos, se o produto já existir no carrinho, apenas a quantidade dele deve ser alterada
 
 ROTA: `/cart/add_item`
@@ -111,24 +111,24 @@ Response:
       "id": 1230,
       "name": "Nome do produto X",
       "quantity": 2, // considerando que esse produto já estava no carrinho
-      "unit_price": 7.00, 
-      "total_price": 14.00, 
+      "unit_price": 7.00,
+      "total_price": 14.00,
     },
     {
       "id": 01020,
       "name": "Nome do produto Y",
       "quantity": 1,
-      "unit_price": 9.90, 
-      "total_price": 9.90, 
+      "unit_price": 9.90,
+      "total_price": 9.90,
     },
   ],
   "total_price": 23.9
 }
 ```
 
-### 3. Remover um produto do carrinho 
+### 3. Remover um produto do carrinho
 
-Criar um endpoint para excluir um produto do do carrinho. 
+Criar um endpoint para excluir um produto do do carrinho.
 
 ROTA: `/cart/:product_id`
 
@@ -161,7 +161,7 @@ Há trechos parcialmente implementados e também sugestões de locais para algum
 
 #### Testes
 Existem testes pendentes, eles estão marcados como <span style="color:green;">Pending</span>, e devem ser implementados para garantir a cobertura dos trechos de código implementados por você.
-Alguns testes já estão passando e outros estão com erro. Com a sua implementação os testes com erro devem passar a funcionar. 
+Alguns testes já estão passando e outros estão com erro. Com a sua implementação os testes com erro devem passar a funcionar.
 A adição de novos testes é sempre bem-vinda, mas sem alterar os já implementados.
 
 
@@ -177,9 +177,9 @@ A adição de novos testes é sempre bem-vinda, mas sem alterar os já implement
 
 A aplicação já possui um Dockerfile, que define como a aplicação deve ser configurada dentro de um contêiner Docker. No entanto, para completar a dockerização da aplicação, é necessário criar um arquivo `docker-compose.yml`. O arquivo irá definir como os vários serviços da aplicação (por exemplo, aplicação web, banco de dados, etc.) interagem e se comunicam.
 
-- Adicione tratamento de erros para situações excepcionais válidas, por exemplo: garantir que um produto não possa ter quantidade negativa. 
+- Adicione tratamento de erros para situações excepcionais válidas, por exemplo: garantir que um produto não possa ter quantidade negativa.
 
-- Se desejar você pode adicionar a configuração faltante no arquivo `docker-compose.yml` e garantir que a aplicação rode de forma correta utilizando Docker. 
+- Se desejar você pode adicionar a configuração faltante no arquivo `docker-compose.yml` e garantir que a aplicação rode de forma correta utilizando Docker.
 
 ## Informações técnicas
 
@@ -256,6 +256,37 @@ Por padrão, o container sobe com `sleep infinity` e aguarda você iniciar o ser
 # CMD ["./bin/rails", "server", "-b", "0.0.0.0"]  ← descomentar
 CMD ["sleep", "infinity"]                          ← comentar
 ```
+
+## Rotas disponíveis
+
+### Produtos
+
+| Método | Rota | Descrição |
+|---|---|---|
+| Método | Rota | Descrição |
+|---|---|---|
+| `GET` | `/products` | Lista todos os produtos |
+| `GET` | `/products/:id` | Exibe um produto |
+| `POST` | `/products` | Cria um produto |
+| `PATCH/PUT` | `/products/:id` | Atualiza um produto |
+| `DELETE` | `/products/:id` | Remove um produto |
+
+**POST /products** e **PATCH/PUT /products/:id**
+```json
+{
+  "product": {
+    "name": "Nome do produto",
+    "price": 9.99
+  }
+}
+```
+
+### Utilitários
+
+| Método | Rota | Descrição |
+|---|---|---|
+| `GET` | `/up` | Health check da aplicação |
+| `GET` | `/sidekiq` | Dashboard do Sidekiq |
 
 ### Como enviar seu projeto
 Salve seu código em um versionador de código (GitHub, GitLab, Bitbucket) e nos envie o link publico. Se achar necessário, informe no README as instruções para execução ou qualquer outra informação relevante para correção/entendimento da sua solução.
