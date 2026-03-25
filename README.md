@@ -214,5 +214,48 @@ Executar os testes:
 bundle exec rspec
 ```
 
+## Executando a app com Docker
+
+Pré-requisitos: Docker e Docker Compose instalados.
+
+Subir os serviços (API, banco de dados e Redis):
+```bash
+make up
+```
+
+Após subir, os containers ficam em execução em background. Para acessar o container e iniciar o servidor manualmente:
+```bash
+make bash
+./bin/rails server -b 0.0.0.0
+```
+
+Pausar os serviços (mantém dados e imagens):
+```bash
+make stop
+```
+
+Remover tudo do projeto (containers, volumes e imagens):
+```bash
+make clean
+```
+
+### Comandos disponíveis no Makefile
+
+| Comando | Descrição |
+|---|---|
+| `make up` | Sobe os containers em background |
+| `make stop` | Pausa os containers (dados preservados) |
+| `make clean` | Remove tudo do projeto (containers, volumes e imagens) |
+| `make bash` | Abre o terminal dentro do container web |
+
+### Subindo o servidor automaticamente
+
+Por padrão, o container sobe com `sleep infinity` e aguarda você iniciar o servidor manualmente. Se preferir que o servidor suba automaticamente com `make up`, edite o `Dockerfile`:
+
+```dockerfile
+# CMD ["./bin/rails", "server", "-b", "0.0.0.0"]  ← descomentar
+CMD ["sleep", "infinity"]                          ← comentar
+```
+
 ### Como enviar seu projeto
 Salve seu código em um versionador de código (GitHub, GitLab, Bitbucket) e nos envie o link publico. Se achar necessário, informe no README as instruções para execução ou qualquer outra informação relevante para correção/entendimento da sua solução.
