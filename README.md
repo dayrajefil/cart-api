@@ -126,7 +126,7 @@ Response:
 }
 ```
 
-### 3. Remover um produto do carrinho
+### 4. Remover um produto do carrinho
 
 Criar um endpoint para excluir um produto do do carrinho.
 
@@ -191,7 +191,7 @@ A aplicação já possui um Dockerfile, que define como a aplicação deve ser c
 
 ### Como executar o projeto
 
-## Executando a app sem o docker
+### Executando a app sem o docker
 Dado que todas as as ferramentas estão instaladas e configuradas:
 
 Instalar as dependências do:
@@ -214,7 +214,7 @@ Executar os testes:
 bundle exec rspec
 ```
 
-## Executando a app com Docker
+### Executando a app com Docker
 
 Pré-requisitos: Docker e Docker Compose instalados.
 
@@ -241,6 +241,36 @@ Remover tudo do projeto (containers, volumes e imagens):
 make clean
 ```
 
+#### Rodando os testes com Docker
+
+O docker-compose possui um serviço `test` isolado com `RAILS_ENV=test` e banco dedicado. Para executá-lo:
+
+```bash
+make test
+```
+
+Equivalente a:
+```bash
+docker-compose --profile test run --rm test
+```
+
+O serviço sobe, roda a suíte completa do RSpec e encerra automaticamente.
+
+#### Rodando o Sidekiq com Docker
+
+O Sidekiq processa os jobs em background (ex: marcação e remoção de carrinhos abandonados). Para iniciá-lo dentro do container web:
+
+```bash
+make sidekiq
+```
+
+Equivalente a:
+```bash
+docker-compose exec web bundle exec sidekiq
+```
+
+> O Sidekiq deve estar rodando para que o `MarkCartAsAbandonedJob` seja agendado e executado.
+
 ### Comandos disponíveis no Makefile
 
 | Comando | Descrição |
@@ -249,6 +279,8 @@ make clean
 | `make stop` | Pausa os containers (dados preservados) |
 | `make clean` | Remove tudo do projeto (containers, volumes e imagens) |
 | `make bash` | Abre o terminal dentro do container web |
+| `make test` | Roda a suíte de testes via container isolado |
+| `make sidekiq` | Inicia o Sidekiq dentro do container web |
 
 ### Subindo o servidor automaticamente
 
@@ -307,7 +339,7 @@ O código do host é sincronizado automaticamente com o container via volume —
 | Método | Rota | Descrição |
 |---|---|---|
 | `GET` | `/up` | Health check da aplicação |
-| `GET` | `/sidekiq` | Dashboard do Sidekiq |
+| `GET` | `/sidekiq` | Dashboard do Sidekiq (http://localhost:3000/sidekiq) |
 
 ### Como enviar seu projeto
 Salve seu código em um versionador de código (GitHub, GitLab, Bitbucket) e nos envie o link publico. Se achar necessário, informe no README as instruções para execução ou qualquer outra informação relevante para correção/entendimento da sua solução.

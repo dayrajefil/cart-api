@@ -9,3 +9,9 @@ clean:
 
 bash:
 	docker-compose exec web bash
+
+test:
+	docker-compose --profile test run --rm test
+
+sidekiq:
+	docker-compose exec web bundle exec sidekiq
