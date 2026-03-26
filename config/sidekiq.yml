@@ -4,3 +4,9 @@
 :queues:
   - critical
   - default
+
+:scheduler:
+  :schedule:
+    mark_cart_as_abandoned:
+      cron: "0 * * * *"
+      class: MarkCartAsAbandonedJob
