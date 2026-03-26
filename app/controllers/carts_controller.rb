@@ -59,7 +59,8 @@ class CartsController < ApplicationController
   end
 
   def add_or_update_item(cart, product_id, quantity)
-    cart_item = cart.cart_items.find_or_initialize_by(product_id: product_id)
+    product = Product.find(product_id)
+    cart_item = cart.cart_items.find_or_initialize_by(product: product)
     cart_item.quantity = cart_item.new_record? ? quantity : cart_item.quantity + quantity
     cart_item.save!
   end
