@@ -12,6 +12,7 @@ gem 'sidekiq', '~> 7.2', '>= 7.2.4'
 gem 'sidekiq-scheduler', '~> 5.0', '>= 5.0.3'
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem "debug", platforms: %i[ mri windows ]
   gem 'rspec-rails', '~> 6.1.0'
   gem 'factory_bot_rails'

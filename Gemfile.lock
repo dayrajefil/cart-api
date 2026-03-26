@@ -90,6 +90,10 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     diff-lcs (1.5.1)
+    dotenv (3.2.0)
+    dotenv-rails (3.2.0)
+      dotenv (= 3.2.0)
+      railties (>= 6.1)
     drb (2.2.1)
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
@@ -296,6 +300,7 @@ DEPENDENCIES
   bootsnap
   byebug
   debug
+  dotenv-rails
   factory_bot_rails
   faker
   guard

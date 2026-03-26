@@ -129,16 +129,27 @@ O job é agendado para rodar a cada hora via Sidekiq.
 
 ### Sem Docker
 
-Dado que todas as ferramentas estão instaladas e configuradas:
+Copie o arquivo de exemplo e preencha com os valores do seu ambiente:
+```bash
+cp .env.example .env
+```
 
+Instale as dependências:
 ```bash
 bundle install
 ```
 
+Prepare o banco de dados:
+```bash
+bundle exec rails db:prepare
+```
+
+Inicie o Sidekiq:
 ```bash
 bundle exec sidekiq
 ```
 
+Inicie o servidor:
 ```bash
 bundle exec rails server
 ```
